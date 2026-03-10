@@ -1,11 +1,11 @@
 # Overview
 
-It is public template of assignment `"labrabota 3"` for FPMI students
+This is task 1, option 15
 
 # Usage
 
-Please, edit README and add some details, as instance **{add your last name, first name and group number}**.
+This app determines in which class the "third-best-performing student" has the highest average grade. **{Muraveiko, Ignat group 13 (b)}**.
 
 # Building
 
-Please, import repository and use for repl.it project, which is defined in the assignment "labrabota 3".
+gcc is required for compilation
