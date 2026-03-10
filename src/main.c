@@ -42,24 +42,49 @@ double kth_largest(double arr[], int n, int k) {
     return result;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     double class1[CLASS_SIZE];
     double class2[CLASS_SIZE];
 
     srand(time(NULL));
 
-    fill_random(class1, CLASS_SIZE, 2.0, 5.0);
-    fill_random(class2, CLASS_SIZE, 2.0, 5.0);
+    if (argc >= 2 * CLASS_SIZE + 1) {
+        for (int i = 0; i < CLASS_SIZE; i++) {
+            class1[i] = atof(argv[1 + i]);
+        }
+        for (int i = 0; i < CLASS_SIZE; i++) {
+            class2[i] = atof(argv[1 + CLASS_SIZE + i]);
+        }
+        printf("Данные взяты из аргументов командной строки.\n");
+    } else {
+        printf("Недостаточно аргументов. Генерируем случайные оценки (от 2 до 5).\n");
+        fill_random(class1, CLASS_SIZE, 2.0, 5.0);
+        fill_random(class2, CLASS_SIZE, 2.0, 5.0);
+    }
 
-    printf("Класс 1 (случайные оценки):\n");
+    printf("Класс 1 (средние оценки):\n");
     print_array(class1, CLASS_SIZE);
-    printf("Класс 2 (случайные оценки):\n");
+    printf("Класс 2 (средние оценки):\n");
     print_array(class2, CLASS_SIZE);
 
     double third1 = kth_largest(class1, CLASS_SIZE, 3);
     double third2 = kth_largest(class2, CLASS_SIZE, 3);
-    printf("Третья по величине оценка в классе 1: %.2f\n", third1);
-    printf("Третья по величине оценка в классе 2: %.2f\n", third2);
+
+    if (third1 < 0 || third2 < 0) {
+        printf("Ошибка при вычислении.\n");
+        return 1;
+    }
+
+    printf("Третья по успеваемости оценка в классе 1: %.2f\n", third1);
+    printf("Третья по успеваемости оценка в классе 2: %.2f\n", third2);
+
+    if (third1 > third2) {
+        printf("В классе 1 третья оценка больше.\n");
+    } else if (third2 > third1) {
+        printf("В классе 2 третья оценка больше.\n");
+    } else {
+        printf("Оценки равны.\n");
+    }
 
     return 0;
 }
